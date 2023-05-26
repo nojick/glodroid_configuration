@@ -48,9 +48,13 @@ endif
 
 include $(PLATFORM_PATH)/fstab/fstab.mk
 include $(PLATFORM_PATH)/kernel/kernel.mk
+ifneq ($(PRODUCT_BOARD_PLATFORM),qcom_msm8916)
 include $(PLATFORM_PATH)/uboot/uboot.mk
+endif
 include $(PLATFORM_PATH)/tools/tools.mk
+ifneq ($(PRODUCT_BOARD_PLATFORM),qcom_msm8916)
 include $(PLATFORM_PATH)/atf.mk
+endif
 
 ifeq ($(PRODUCT_BOARD_PLATFORM),sunxi)
 ifneq ($(CRUST_FIRMWARE_DEFCONFIG),)
