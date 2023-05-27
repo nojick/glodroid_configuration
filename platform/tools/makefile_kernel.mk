@@ -54,7 +54,7 @@ $(INSTALL_TARGET): $(BUILD_TARGET)
 	@mv $(OUT_INSTALL_DIR)/modules/lib/modules/$${KERNELRELEASE} $(OUT_INSTALL_DIR)/modules/lib/modules/GloDroid
 
 ifeq ($(TARGET_ARCH),arm64)
-	@lz4c -f -c1 $(OUT_INSTALL_DIR)/vmlinuz $(OUT_INSTALL_DIR)/kernel &>>$@ || (cat $@.tmp && exit 1)
+	@cat $(OUT_BUILD_DIR)/arch/arm64/boot/Image.gz $(OUT_INSTALL_DIR)/dtbs/qcom/*-$(TARGET_PRODUCT).dtb > $(OUT_INSTALL_DIR)/kernel
 else
 	@cp $(OUT_INSTALL_DIR)/vmlinuz $(OUT_INSTALL_DIR)/kernel
 endif
