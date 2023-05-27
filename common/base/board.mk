@@ -132,8 +132,10 @@ BOARD_KERNEL_SRC_DIR  ?= glodroid/kernel/common-android13-5.15-lts
 endif
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE  := androidboot.hardware=$(TARGET_PRODUCT)
+ifneq ($(PRODUCT_BOARD_PLATFORM),qcom_msm8916)
 BOARD_MKBOOTIMG_ARGS  += --kernel_offset 0x80000 --second_offset 0x8800 --ramdisk_offset 0x3300000
 BOARD_MKBOOTIMG_ARGS  += --dtb_offset 0x3000000 --header_version $(BOARD_BOOT_HEADER_VERSION)
+endif
 
 BOARD_RAMDISK_USE_LZ4 := true
 
@@ -144,6 +146,54 @@ BOARD_USES_METADATA_PARTITION := true
 
 BOARD_USES_PRODUCTIMAGE := true
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
+
+ifeq ($(PRODUCT_BOARD_PLATFORM),qcom_msm8916)
+GD_NO_DEFAULT_GEN_DTBCFG := true
+
+BOARD_AVB_ENABLE := false
+AB_OTA_UPDATER := false
+AB_OTA_PARTITIONS :=
+
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RECOVERY := true
+
+BOARD_USES_GENERIC_KERNEL_IMAGE := false
+BOARD_USES_METADATA_PARTITION := false
+BOARD_USES_VENDOR_DLKMIMAGE := false
+BOARD_USES_PRODUCTIMAGE := false
+BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := false
+BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := false
+BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := false
+# Clear those vars to really disable creation of their respective image
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE :=
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE :=
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE :=
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE :=
+BOARD_SUPER_PARTITION_SIZE :=
+
+TARGET_COPY_OUT_VENDOR_DLKM := vendor/vendor_dlkm
+TARGET_COPY_OUT_PRODUCT := system/product
+TARGET_COPY_OUT_SYSTEM_EXT := system/system_ext
+TARGET_VENDOR_MODULES := $(TARGET_OUT_VENDOR)/lib/modules
+TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
+
+BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_BOOT_HEADER_VERSION := 0
+
+BOARD_KERNEL_SRC_DIR  := glodroid/kernel/msm8916-mainline
+BOARD_KERNEL_BASE     := 0x80000000
+BOARD_KERNEL_PAGESIZE := 2048
+
+BOARD_KERNEL_CMDLINE  += console=tty0 androidboot.console=tty0 no_console_suspend
+BOARD_KERNEL_CMDLINE  += androidboot.boot_devices=soc@0/7824900.mmc
+BOARD_KERNEL_CMDLINE  += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE  += firmware_class.path=/vendor/firmware/ init=/init printk.devkmsg=on
+
+BOARD_MKBOOTIMG_ARGS  += --kernel_offset 0x80000 --second_offset 0x00f00000 --ramdisk_offset 0x01000000
+BOARD_MKBOOTIMG_ARGS  += --tags_offset 0x01e00000 --header_version $(BOARD_BOOT_HEADER_VERSION)
+
+BOARD_RAMDISK_USE_LZ4 := false
+endif
 
 # Enable dex-preoptimization to speed up first boot sequence
 DEX_PREOPT_DEFAULT := nostripping
