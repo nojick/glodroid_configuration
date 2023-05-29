@@ -8,11 +8,11 @@ service dbus-1.0 /vendor/bin/dbus-daemon --system --nofork
     user root
     group root
 
-service modemmanager /vendor/bin/ModemManager --debug
+service modemmanager /vendor/bin/ModemManager --log-level=INFO
     user root
     group root
 
-on boot
+on property:sys.boot_completed=1
     mkdir /mnt/var 0755 system system
     mkdir /mnt/var/run 0755 system system
     mkdir /mnt/var/run/dbus 0755 system system
