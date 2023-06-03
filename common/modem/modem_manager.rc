@@ -4,6 +4,10 @@
 #
 # Copyright (C) 2022 Roman Stratiienko (r.stratiienko@gmail.com)
 
+# Kickstart modem again once firmware is available
+on late-fs
+    write /sys/class/remoteproc/remoteproc0/state start
+
 service uim-selection /vendor/bin/msm-modem-uim-selection.sh
     user root
     group root
