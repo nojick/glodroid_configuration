@@ -25,7 +25,7 @@ using aidl::android::hardware::vibrator::FFDeviceBase;
 using aidl::android::hardware::vibrator::FFDeviceDummy;
 using aidl::android::hardware::vibrator::Vibrator;
 
-static const char* INPUT_PATH = "/sys/devices/platform/vibrator/input";
+static const char* INPUT_PATH = "/sys/devices/platform/soc@0/200f000.spmi/spmi-0/0-01/200f000.spmi:pmic@1:vibrator@c000/input";
 
 int main() {
     ABinderProcess_setThreadPoolMaxThreadCount(0);
