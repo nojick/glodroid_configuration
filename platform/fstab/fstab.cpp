@@ -35,7 +35,11 @@ vendor_dlkm                         /vendor_dlkm    ext4    ro,noatime,errors=pa
 #endif
 #else
 /dev/block/platform/soc@0/7824900.mmc/by-name/system    /system            ext4    noatime,ro,errors=panic wait,first_stage_mount
+#ifdef device_ido
+/dev/block/platform/soc@0/7824900.mmc/by-name/cust     /vendor            ext4    noatime,ro,errors=panic wait,first_stage_mount
+#else
 /dev/block/platform/soc@0/7824900.mmc/by-name/cache     /vendor            ext4    noatime,ro,errors=panic wait,first_stage_mount
+#endif
 /dev/block/platform/soc@0/7824900.mmc/by-name/userdata  /data              ext4    noatime,nosuid,nodev,barrier=1 wait,check,latemount,quota,formattable,__FILE_ENCRYPT__
 
 // For firmwares
