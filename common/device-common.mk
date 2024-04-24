@@ -22,9 +22,9 @@ ifeq ($(GD_NO_DEFAULT_BLUETOOTH),)
     $(call inherit-product, $(LOCAL_PATH)/bluetooth/device.mk)
 endif
 
-ifeq ($(GD_NO_DEFAULT_GRAPHICS),)
-    $(call inherit-product, $(LOCAL_PATH)/graphics/device.mk)
-endif
+#ifeq ($(GD_NO_DEFAULT_GRAPHICS),)
+#    $(call inherit-product, $(LOCAL_PATH)/graphics/device.mk)
+#endif
 
 ifeq ($(GD_NO_DEFAULT_CODECS),)
     $(call inherit-product, $(LOCAL_PATH)/codecs/device.mk)

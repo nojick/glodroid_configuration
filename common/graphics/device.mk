@@ -3,7 +3,7 @@
 # GloDroid project (https://github.com/GloDroid)
 #
 # Copyright (C) 2022 Roman Stratiienko (r.stratiienko@gmail.com)
-
+ifeq ($(GD_USE_RS_HWCOMPOSER),)
 # OpenGL driver
 PRODUCT_PACKAGES += \
     libEGL_mesa \
@@ -18,7 +18,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.opengles.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml
 
-ifeq ($(GD_USE_RS_HWCOMPOSER),)
 # Composer passthrough HAL
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.4-impl \
@@ -26,11 +25,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.drm_gd \
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hardware.hwcomposer=drm_gd
-else
-PRODUCT_PACKAGES += \
-    android.hardware.composer.hwc3-service.rs \
-    android.hardware.composer.hwc3-rs.rc android.hardware.composer.hwc3-rs.xml
-endif
 
 ## Composer HAL for gralloc4 + minigbm gralloc4
 PRODUCT_PACKAGES += \
@@ -43,4 +37,6 @@ PRODUCT_PACKAGES += \
 
 GD_LCD_DENSITY ?= 160
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=$(GD_LCD_DENSITY) \
+    ro.sf.lcd_density=$(GD_LCD_DENSITY)
+
+endif

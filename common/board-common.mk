@@ -18,9 +18,9 @@ ifeq ($(GD_NO_DEFAULT_BLUETOOTH),)
 include $(CBC_LOCAL_PATH)/bluetooth/board.mk
 endif
 
-ifeq ($(GD_NO_DEFAULT_GRAPHICS),)
-include $(CBC_LOCAL_PATH)/graphics/board.mk
-endif
+#ifeq ($(GD_NO_DEFAULT_GRAPHICS),)
+#include $(CBC_LOCAL_PATH)/graphics/board.mk
+#endif
 
 ifeq ($(GD_NO_DEFAULT_CODECS),)
 include $(CBC_LOCAL_PATH)/codecs/board.mk

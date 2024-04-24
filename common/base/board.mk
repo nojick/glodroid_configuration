@@ -150,6 +150,8 @@ BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 ifeq ($(PRODUCT_BOARD_PLATFORM),qcom_msm8916)
 GD_NO_DEFAULT_GEN_DTBCFG := true
 
+GD_NO_DEFAULT_GRAPHICS := true
+GD_USE_RS_HWCOMPOSER := true
 BOARD_AVB_ENABLE := false
 AB_OTA_UPDATER := false
 AB_OTA_PARTITIONS :=
@@ -201,6 +203,8 @@ WITH_DEXPREOPT := true
 ART_USE_HSPACE_COMPACT := true
 
 DEVICE_MATRIX_FILE := $(B_LOCAL_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE += $(B_LOCAL_PATH)/android.hardware.graphics.composer@2.4.xml
+
 
 # SELinux support
 BOARD_VENDOR_SEPOLICY_DIRS       += $(B_LOCAL_PATH)/sepolicy/vendor
