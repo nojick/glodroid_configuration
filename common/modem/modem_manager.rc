@@ -6,7 +6,7 @@
 
 # Kickstart modem again once firmware is available
 on late-fs
-    write /sys/class/remoteproc/remoteproc0/state start
+    write /sys/class/remoteproc/remoteproc1/state start
 
 service uim-selection /vendor/bin/msm-modem-uim-selection.sh
     user root
